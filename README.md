@@ -21,7 +21,7 @@ The project dataset is openly available on Kaggle [SIIM-ISIC Melanoma Classifica
 
 Furthermore, thirty-three thousand are in training set among the forty-four thousand images and around eleven thousand in the test set. However, our quick analysis found a significant class imbalance in the training dataset. Thirty-two thousand are labelled as benign (Not Cancerous) and only five hundred marked as malignant (Cancerous). That is, the training set contains only ±1.76% of malignant images. Along with the patient's images, the dataset also has a CSV file containing a detail about patient-level contextual information, which includes patient id, gender, patient age, location of benign/malignant site, and indicator of malignancy for the imaged lesion.
 
-![Class Imbalance](./readme_images/1.png)
+![Class Imbalance](./readme_images/1.jpg)
 
 To overcome the issue of class imbalance, we planned to include data from the year 2018 [ISIC, 2018](https://challenge2018.isic-archive.com/) and 2019 [ISIC, 2019](https://challenge2019.isic-archive.com/) competition with our existing 2020 Kaggle competition [SIIM-ISIC Melanoma Classification, 2020](https://www.kaggle.com/c/siim-isic-melanoma-classification). Out of 25k images in the 2019 competition, it has ten times (17.85%) more positive sample ratio, making the metrics more stable (Figure 2).
 
@@ -98,11 +98,11 @@ The data cleaning and pre-processing step are performed on all the dataset obtai
 
 After each epoch, we check the validation accuracy of the model. If the validation accuracy does not increase after 15 epochs, the training process is stopped, and the best model weights are saved for the prediction). The prediction is performed on the test set, and results are stored in the CSV file. Along with the model weights, all diagnostic information for the model is stored locally.
 
-![Model training pipeline](./readme_images/6.svg)
+![Model training pipeline](./readme_images/6.png)
 
-The web UI contains five pages, of which four of them are used to explain the project and how to use the proposed CAD system (Figure 7). The inference page named **"Our Solution"** is where the inference is made on the skin lesion images. All the validation is performed on the client-side to reduce the server overload. If the inserted information is not correct, then an error notification popup is shown; any user can easily understand that. Validated data is passed onto the server, where inference is performed by Onnx network, and response is return in the JSON format. On the website, we have configured the JQuery, which listen for server response. As soon as the response is return, the information is populated in a graphical format. Plus, for user convenience, we provide the functionality in which a user can generate the report in PDF format (Figure 7).
+The web UI contains five pages, of which four of them are used to explain the project and how to use the proposed CAD system. The inference page named **"Our Solution"** is where the inference is made on the skin lesion images. All the validation is performed on the client-side to reduce the server overload. If the inserted information is not correct, then an error notification popup is shown; any user can easily understand that. Validated data is passed onto the server, where inference is performed by Onnx network, and response is return in the JSON format. On the website, we have configured the JQuery, which listen for server response. As soon as the response is return, the information is populated in a graphical format. Plus, for user convenience, we provide the functionality in which a user can generate the report in PDF format (Figure 7).
 
-![WebUI FlowChart](readme_images/7.svg)
+![WebUI FlowChart](readme_images/7.png)
 
 ## CNN Architecture Design
 The project aims to classify skin cancer using skin lesions images. To achieve higher accuracy and results on the classification task, we have used various EfficientNet models. Transfer learning is applied to the EfficientNet models. We have unfrozen all the layer except BatchNormalization to stop the BatchNormalization layer from updating its means and variance statistics. If we train the BatchNormalisation layer, it will destroy what the model has learned, and accuracy will significantly reduce.
@@ -112,13 +112,17 @@ We have explored several different pre-trained models like VGG-16, VGG-19, ResNe
 
 CNN's can be scaled with three dimensions: depth (d), width (w), and resolution (r). Depth scaling is adding or removing layers in the network. Width scaling makes the network wider, while resolution scaling increases or decreases image resolution passed in the CNN.
 
-# Figure 8, Scaling dimension (Mingxing & Quoc, 2019)
+![Scaling dimension (Mingxing & Quoc, 2019)](./readme_images/8.png)
 
-Scaling width, depth and resolution improve network accuracy. However, it quickly saturates as the network is scaled only in a single dimension. From Figure 9, we can see that the baseline network (Figure 8) saturates at 80% when scaled in a single dimension.
+**Image Source**: [(Mingxing & Quoc, 2019)](https://arxiv.org/pdf/1905.11946.pdf)
 
-# Figure 9, Accuracy saturation when scaling on a single dimension (Mingxing & Quoc, 2019)
+Scaling width, depth and resolution improve network accuracy. However, it quickly saturates as the network is scaled only in a single dimension. From above diagram, we can see that the baseline network saturates at 80% when scaled in a single dimension.
 
-EfficientNet used compound scaling (Figure 8), which uniformly scales the network's width, depth, and resolution. Among the different EfficientNet, EfficientNetB0 is the baseline network obtained by doing **Neural Architecture Search (NAS)**. EfficientNetB1 to B7 is built upon the baseline network having a different value of compound scaling.
+![Accuracy saturation when scaling on a single dimension (Mingxing & Quoc, 2019)](./readme_images/9.png)
+
+**Image Source**: [(Mingxing & Quoc, 2019)](https://arxiv.org/pdf/1905.11946.pdf)
+
+EfficientNet used compound scaling, which uniformly scales the network's width, depth, and resolution. Among the different EfficientNet, EfficientNetB0 is the baseline network obtained by doing **Neural Architecture Search (NAS)**. EfficientNetB1 to B7 is built upon the baseline network having a different value of compound scaling.
 **We have chosen to use EfficientNet B4, B5 and B7 as these model achieved start-of-the-art 84.4% top-1/ 97.1% top 5 accuracies (Mingxing & Quoc, 2019) on the ImageNet competition.**
 
 ## GUI Design
@@ -126,7 +130,7 @@ To tackle the challenge of identifying skin cancer from skin lesions, we have to
 
 The web GUI consists of five main pages, of which four of them are used to explain the benefit of using the tool and way to reduce the death caused by skin cancer. The inference page named **"Our Solution"** is where the inference is performed using ensemble methodology.
 
-The main page introduces the user to the approach we have chosen to scale across the domain where we merge the deep learning technology with the health care sector. Also, the main pages have four main sections (Figure 10, 11, 12 and 13). We have added button on the navigation bar for user convenience, which takes the user to the specified section.
+The main page introduces the user to the approach we have chosen to scale across the domain where we merge the deep learning technology with the health care sector. Also, the main pages have four main sections. We have added button on the navigation bar for user convenience, which takes the user to the specified section.
 
 # Figure 10 Main page (Section one)
 
@@ -188,9 +192,11 @@ Table 1, Label Name
 
 3. **Original images are cropped** to *68x768* and *512x512* pixels. To reduce the random noise and black border on the edge of the images (Figure 2)
 4. **Resized image input sizes** to *380x380* and *448x448* pixels. The images are resized to lower resolution due to GPU memory constraints. Otherwise, it was planned to load the images with the original cropped image pixels (Table 3).
-5. **Cosine Decay learning rate** is set to *3e-5* and *1e-5* with *1* **Warmup epoch**. Along with the pre-trained model, we are using Cosine decay with a warmup learning rate scheduler. Warmup strategy gradually increases the learning rate from zero to the initial learning rate during initial **Nth** epochs or **m** batches. Cosine decay is used in conjunction with the warmup learning rate scheduler to decrease the initial learning rate value steadily. Cosine decay is used rather than exponential or steps decay. It reduces the learning rate slowly at the start and end while falling linearly in the middle—cosine decay help to improve the training process (Figure 21).
+5. **Cosine Decay learning rate** is set to *3e-5* and *1e-5* with *1* **Warmup epoch**. Along with the pre-trained model, we are using Cosine decay with a warmup learning rate scheduler. Warmup strategy gradually increases the learning rate from zero to the initial learning rate during initial **Nth** epochs or **m** batches. Cosine decay is used in conjunction with the warmup learning rate scheduler to decrease the initial learning rate value steadily. Cosine decay is used rather than exponential or steps decay. It reduces the learning rate slowly at the start and end while falling linearly in the middle—cosine decay help to improve the training process.
 
-# Figure 21, Cosine Decay (Tong et al., 2018)
+![Cosine Decay (Tong et al., 2018)](./readme_images/21.png)
+
+**Image Source**: [(Tong et al., 2018)](https://arxiv.org/pdf/1812.01187.pdf)
 
 6. **Optimiser**: *Adam*. Adam combined the best properties of RMSProp and AdaGrad to handle the sparse gradients on the noisy problems. As we have sparse data, Adam is used because of the adaptive learning rate.
 7. **Training Epoch**: *15*. As we are using the ensemble methodology, we have trained all the variants of the EfficientNet model on 15 epoch.
