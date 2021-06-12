@@ -1,0 +1,5 @@
+{
+    "jupyter.jupyterServerType": "local",
+    "python.linting.enabled": true,
+    "python.analysis.completeFunctionParens": true
+}

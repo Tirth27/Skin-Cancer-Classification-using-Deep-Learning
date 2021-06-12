@@ -1,0 +1,7 @@
+ISIC-2018 Challenge: Task 3: Training Ground Truth (HAM10000 Dataset: https://arxiv.org/abs/1803.10417 ) (c) by ViDIR Group, Department of Dermatology, Medical University of Vienna
+
+ISIC-2018 Challenge: Task 3: Training Ground Truth (HAM10000 Dataset: https://arxiv.org/abs/1803.10417 ) is licensed under a
+Creative Commons Attribution-NonCommercial 4.0 International License.
+
+You should have received a copy of the license along with this
+work. If not, see <http://creativecommons.org/licenses/by-nc/4.0/>.
