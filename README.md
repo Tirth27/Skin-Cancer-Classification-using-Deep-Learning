@@ -17,7 +17,7 @@ The overarching goal is to support the efforts to reduce the death caused by ski
 We aim to make it accessible for everyone and leverage the existing model and improve the current system. To make it accessible to the public, we build an easy-to-use website. The user or dermatologist can upload the patient demographic information with the skin lesion image. With the image and patient demographic as input, the model will analyse the data and return the results within a split second. Keeping the broader demographic of people in the vision, we have also tried to develop the basic infographic page, which provides a generalised overview about melanoma and steps to use the online tool to get the results.
 
 ## Dataset
-The project dataset is openly available on Kaggle [SIIM-ISIC Melanoma Classification, 2020](https://www.kaggle.com/c/siim-isic-melanoma-classification). It consists of around forty-four thousand images from the same patient sampled over different weeks and stages. The dataset consists of images in various file format. The raw images are in DICOM (Digital Imaging and COmmunications in Medicine), containing patient metadata and skin lesion images. DICOM is a commonly used file format in medical imaging. Additionally, the dataset also includes images in TFRECORDS (TensorFlow Records) and JPEG format.
+The project dataset is openly available on Kaggle [(SIIM-ISIC Melanoma Classification, 2020)](https://www.kaggle.com/c/siim-isic-melanoma-classification). It consists of around forty-four thousand images from the same patient sampled over different weeks and stages. The dataset consists of images in various file format. The raw images are in DICOM (Digital Imaging and COmmunications in Medicine), containing patient metadata and skin lesion images. DICOM is a commonly used file format in medical imaging. Additionally, the dataset also includes images in TFRECORDS (TensorFlow Records) and JPEG format.
 
 Furthermore, thirty-three thousand are in training set among the forty-four thousand images and around eleven thousand in the test set. However, our quick analysis found a significant class imbalance in the training dataset. Thirty-two thousand are labelled as benign (Not Cancerous) and only five hundred marked as malignant (Cancerous). That is, the training set contains only ±1.76% of malignant images (Figure 1). Along with the patient's images, the dataset also has a CSV file containing a detail about patient-level contextual information, which includes patient id, gender, patient age, location of benign/malignant site, and indicator of malignancy for the imaged lesion.
 
@@ -25,7 +25,7 @@ Furthermore, thirty-three thousand are in training set among the forty-four thou
 
 *Figure 1: Class imbalance*
 
-To overcome the issue of class imbalance, we planned to include data from the year 2018 [ISIC, 2018](https://challenge2018.isic-archive.com/) and 2019 [ISIC, 2019](https://challenge2019.isic-archive.com/) competition with our existing 2020 Kaggle competition [SIIM-ISIC Melanoma Classification, 2020](https://www.kaggle.com/c/siim-isic-melanoma-classification). Out of 25k images in the 2019 competition, it has ten times (17.85%) more positive sample ratio, making the metrics more stable (Figure 2).
+To overcome the issue of class imbalance, we planned to include data from the year 2018 [(ISIC, 2018)](https://challenge2018.isic-archive.com/) and 2019 [(ISIC, 2019)](https://challenge2019.isic-archive.com/) competition with our existing 2020 Kaggle competition [(SIIM-ISIC Melanoma Classification, 2020)](https://www.kaggle.com/c/siim-isic-melanoma-classification). Out of 25k images in the 2019 competition, it has ten times (17.85%) more positive sample ratio, making the metrics more stable (Figure 2).
 
 ```
 2020 Raw DataSet
@@ -44,7 +44,10 @@ Total images in Validation set Ground Truth set 2019:  193
 ```
 *Figure 2: Training and testing images in 2020, 2019 and 2018 competition.*
 
-### Sample Images From Dataset
+***Note: Processed dataset can be directly downloaded from the [Kaggle Discussions](https://www.kaggle.com/c/siim-isic-melanoma-classification/discussion/164092)***
+
+### [Sample Images From Dataset](./Data/Sample%20Images/../Sample%20Images/ISIC_0015719.jpg)
+
 Figure 3 is labelled as benign melanoma in the dataset.
 
 <p align="center">
@@ -69,12 +72,37 @@ Figure 4 is labelled as malignant melanoma in the dataset.
 
 *Figure 4: Cancerous*
 
-## Data Pre-Processing
+## [Data Pre-Processing](./Notebooks/Data%20Preprocessing.ipynb)
+In any machine learning project, it is critical to set up a trustworthy validation scheme, in order to properly evaluate and compare models. This is especially true if the dataset is small to medium size, or the evaluation metric is unstable, which is the case of this project.
 
-Add about label cleaning things
+There are 33k images in train data. However, only 1.76% are positive samples (i.e., malignant). The small number of positives causes the AUC metric to be very unstable, even with 5-fold cross validation.
+
+Our solution to this problem is to use both last year (including [2018](https://challenge2018.isic-archive.com/) and [2019](https://challenge2019.isic-archive.com/)) and this year's data ([2020](https://www.kaggle.com/c/siim-isic-melanoma-classification)). Even though last year's data is smaller (25k), it has 10 times (17.85%) the positive sample ratio, making the metrices much more stable. 
+
+For a typical image classification problem, the standard approach is to take a deep CNN model (such as the most popular EffcientNet) trained on ImageNet, replace the last layer so that the output dimension equals the target's dimension, and fine tune it on the specific dataset.
+
+The target to predict in [this year's competition](https://www.kaggle.com/c/siim-isic-melanoma-classification) is binary-benign (i.e. no melanoma) or malignant (i.e. melanoma). We noticed that the target information is included in the diagnosis column: target is malignant if and only if diagnosis is melanoma. But diagnosis column is more granular when an image is benign. We believed using diagnosis as target to train the model could give the model more information.
+
+The fact that diagnosis was the target to predict in last year's competition (including [2018](https://challenge2018.isic-archive.com/) and [2019](https://challenge2019.isic-archive.com/)) makes this choice more logical. There is a small problem though. The set of diagnosis is different between this year and last year. We solved it by mapping this year's diagnosis to last year's according to the descriptions on [last year's website](https://challenge2019.isic-archive.com/). See Table 1 for the mapping. There are 9 target values in most of our models. In one model, we only used 4 target values (NV, MEL, BKL and Unknown) by mapping the other five (*) to Unknown.
+
+| 2019 Diagnosis | 2020 Diagnosis                                                              | Target  |
+|----------------|-----------------------------------------------------------------------------|---------|
+| NV             | nevus                                                                       | NV      |
+| MEL            | melanoma                                                                    | MEL     |
+| BCC            |                                                                             | BCC*    |
+| BKL            | seborrheic keratosis<br>lichenoid keratosis<br>solar lentigo<br>lentigo NOS | BKL     |
+| AK             |                                                                             | AK*     |
+| SCC            |                                                                             | SCC*    |
+| VASC           |                                                                             | VASC*   |
+| DF             |                                                                             | DF*     |
+|                | cafe-au-lait macule<br>atypical melanocytic proliferation                   | Unknown |
+
+*Table 1: Mapping from diagnosis to targets.*
+
+This means that the last layer of our classification model has 9-dimensional output. It is trained with cross entropy loss. 
 
 ## Data Augmentation
-In a small size dataset, image augmentation is required to avoid overfitting the training dataset. After data aggregation, we have around 46k images in the training set. The dataset contains significant class imbalance, with most of the classes have an **"Unknown"** category (Table 1). We have defined our augmentation pipeline to deal with the class imbalance. The augmentation that helps to improve the prediction accuracy of the model is selected. The selected augmentation are as follows:
+In a small size dataset, image augmentation is required to avoid overfitting the training dataset. After data aggregation, we have around 46k images in the training set. The dataset contains significant class imbalance, with most of the classes have an **"Unknown"** category (Table 2). We have defined our augmentation pipeline to deal with the class imbalance. The augmentation that helps to improve the prediction accuracy of the model is selected. The selected augmentation are as follows:
 1. **Transpose**: A spatial level transformation that transposes image by swapping rows and columns.
 2. **Flip**: A spatial level transformation that flip image either/both horizontally and/or vertically. Images are randomly flipped either horizontally or vertically to make the model more robust.
 3. **Rotate**: A spatial level transformation that randomly turns images for uniform distribution. Random rotation allows the model to become invariant to the object orientation.
@@ -181,7 +209,7 @@ The **"Our Solution"** page contains two main things. Firstly, a user needs to a
 
 *Figure 16 Our Solution Page (Before Patient Details and Image Upload)*
 
-The validated information is sent to the server on the **"Upload"** button click where the network is ready to the server (Figure 17). The optimised network analyses the image, returning the inference to the client (Figure 18). The inference is automatically populated in the interactive bar graph (Figure 18). The bar graph is easy to read, and it infers the chances of having skin cancer and its type. The information that the end-user has inserted into the **"Fill Patient Detail"** section (Figure 17) is automatically populated in the inference section (Figure 18) for users' convenience. Also, we have provided the functionality to generate the report that can be stored locally for later use (Figure 19) just by click on the **"Generate PDF"** button. The PDF report includes the end-user information with the network prediction (Figure 19).
+The validated information is sent to the server on the **"Upload"** button click where the network is ready to the server (Figure 17). The optimised network analyses the image, returning the inference to the client (Figure 18). The inference is automatically populated in the interactive bar graph (Figure 18). The bar graph is easy to read, and it infers the chances of having skin cancer and its type. The information that the end-user has inserted into the **"Fill Patient Detail"** section (Figure 17) is automatically populated in the inference section (Figure 18) for users' convenience. Also, we have provided the functionality to generate the report that can be stored locally for later use (Figure 19) just by click on the **"Generate PDF"** button. The [PDF report](./readme_images/Patient_ID_ISIC%202029.pdf) includes the end-user information with the network prediction (Figure 19).
 
 Moreover, we have also thought about patient privacy, and for the same reason, none of the patient demographic and skin lesion images are stored on the server. The server received the patient skin lesion image and performed the inference without storing it on the server.
 
@@ -210,7 +238,7 @@ The model evaluation and performance on the test and validation images are as fo
 We have used ensemble terminology to train diverse models and take the average probability ranks of the models to get the final prediction. The model configuration is as follows:
 
 1. **Backbone Pre-trained CNN Model**: *Efficient Net B4, B5 and B7*. We have chosen to use the B4, B5 and B7 variant of the efficient net over B0 as they have achieved higher accuracy on ImageNet competition.
-2. **Targets**: All the model is trained on nine categories (Table 1).
+2. **Targets**: All the model is trained on nine categories (Table 2).
 
 | **Label** | **Name**                                                                             |
 | --------- | ------------------------------------------------------------------------------------ |
@@ -224,10 +252,10 @@ We have used ensemble terminology to train diverse models and take the average p
 | **DF**    | Dermatofibroma                                                                       |
 | **SCC**   | Squamous cell carcinoma                                                              |
 
-*Table 1, Label Name*
+*Table 2, Label Name*
 
 3. **Original images are cropped** to *68x768* and *512x512* pixels. To reduce the random noise and black border on the edge of the images (Figure 2)
-4. **Resized image input sizes** to *380x380* and *448x448* pixels. The images are resized to lower resolution due to GPU memory constraints. Otherwise, it was planned to load the images with the original cropped image pixels (Table 3).
+4. **Resized image input sizes** to *380x380* and *448x448* pixels. The images are resized to lower resolution due to GPU memory constraints. Otherwise, it was planned to load the images with the original cropped image pixels (Table 4).
 5. **Cosine Decay learning rate** is set to *3e-5* and *1e-5* with *1* **Warmup epoch**. Along with the pre-trained model, we are using Cosine decay with a warmup learning rate scheduler. Warmup strategy gradually increases the learning rate from zero to the initial learning rate during initial **Nth** epochs or **m** batches. Cosine decay is used in conjunction with the warmup learning rate scheduler to decrease the initial learning rate value steadily. Cosine decay is used rather than exponential or steps decay. It reduces the learning rate slowly at the start and end while falling linearly in the middle—cosine decay help to improve the training process (Figure 21).
 
 ![Cosine Decay (Tong et al., 2018)](./readme_images/21.png)
@@ -236,10 +264,10 @@ We have used ensemble terminology to train diverse models and take the average p
 
 6. **Optimiser**: *Adam*. Adam combined the best properties of RMSProp and AdaGrad to handle the sparse gradients on the noisy problems. As we have sparse data, Adam is used because of the adaptive learning rate.
 7. **Training Epoch**: *15*. As we are using the ensemble methodology, we have trained all the variants of the EfficientNet model on 15 epoch.
-8. **Training and validation batch size** of *8 for B4* and *4 for B5 and B7* is used. The reason behind choosing the small batch size is due to GPU memory constraints. Otherwise, we have planned to use a batch size of 64 for the training and validation set (Table 3).
+8. **Training and validation batch size** of *8 for B4* and *4 for B5 and B7* is used. The reason behind choosing the small batch size is due to GPU memory constraints. Otherwise, we have planned to use a batch size of 64 for the training and validation set (Table 4).
 
 ## Network Evaluation
-Almost all the EfficientNet model is getting the similar training and validation accuracy (Table 2). Based on the inference result in Table 2, the Efficient Net B5 model is getting the higher accuracy on the dataset. The final ensemble is a simple average of the three models' probability ranks. The model probability prediction is transformed to [0, 1] before averaging.
+Almost all the EfficientNet model is getting the similar training and validation accuracy (Table 3). Based on the inference result in Table 3, the Efficient Net B5 model is getting the higher accuracy on the dataset. The final ensemble is a simple average of the three models' probability ranks. The model probability prediction is transformed to [0, 1] before averaging.
 
 |     Model No    |  Backbone | Image Input Size |   Resize   | Batch Size | Training Accuracy | Validation Accuracy |
 |:---------------:|:---------:|:----------------:|:----------:|:----------:|:-----------------:|:-------------------:|
@@ -248,10 +276,10 @@ Almost all the EfficientNet model is getting the similar training and validation
 |        16       |     B7    |        768       |     380    |      4     |         83%       |          92%        |
 |     Ensemble    |           |                  |            |            |         83%       |          92%        |
 
-*Table 2, the Model inference result*
+*Table 3, the Model inference result*
 
 # Model Evaluation and Deployment
-The EfficientNet ensemble mechanism significantly improves the average prediction performance with reduction is variance component of prediction error (Table 2). The EfficientNet ensemble is able to generalise well as the models are getting higher accuracy on the validation set compared to the training set (Table 2).
+The EfficientNet ensemble mechanism significantly improves the average prediction performance with reduction is variance component of prediction error (Table 3). The EfficientNet ensemble is able to generalise well as the models are getting higher accuracy on the validation set compared to the training set (Table 3).
 
 From Figure 22, we can say that B4 generalised well on the unseen validation dataset. If the model is trained for a longer epoch, it can achieve higher accuracy. The validation loss fluctuates during the initial epoch, but it gets stable at the end of the training (Figure 22).  Also, the training and validation loss is decreasing continuously, which shows that training for a higher number of epochs can help achieve better results (Further detail about future opportunities is under ***Limitations, Future Extension, and Improvements section***). 
 
@@ -263,11 +291,14 @@ Most of the attention is paid to optimising the model to achieve higher accuracy
 
 The raw weights are converted into Open Neural Network Exchange (ONNX). The key benefits of ONNX are its interoperability and hardware access. Once the model is converted into ONNX format, it can be quickly loaded into any hardware that supports ONNX and helps to minimise the inference time. Also, the model weight is reduced by 36% when converted into the ONNX format. 
 
-The optimised ONNX model is then deployed onto our CAD system, which can better support dermatologists' clinical work. The CAD system takes skin lesion and patient demographic as input and outputs the probability among the nine classes (Table 1).  
+The optimised ONNX model is then deployed onto our CAD system, which can better support dermatologists' clinical work. The CAD system takes skin lesion and patient demographic as input and outputs the probability among the nine classes (Table 2).  
+
+### Trained Weights
+We have published our trained weigths of the model settings that are mentioned above in the [Kaggle](https://www.kaggle.com/tirth27/melanoma-classification-kerasonnx-model-weight).
 
 ## Limitations, Future Extension, and Improvements
 
-The main drawback of the project is the computation power. The model is trained on Azure Machine Learning with Standard NC 6 Instance with 6 Cores, 56GiB RAM, 1 NVIDIA Tesla K80 (11GiB GPU RAM) and 380GiB Disk space. The configuration on which we have trained is not enough based on the EfficientNet architecture. To load the model on GPU, we have resized the image and reduced the batch size. The accuracy that we have achieved in Table 2 could be improved if we trained the B7 with an image resolution of 640. We are using the ensemble methodology, and it is expected that the bigger the ensemble, the more stable the accuracy score. To get a more stable accuracy score, we have proposed 18 different configurations (Table 3), which can be used to achieve a better result on the skin lesion dataset. The configuration is chosen while considering the model diversity that included backbone architecture and different targets. 
+The main drawback of the project is the computation power. The model is trained on Azure Machine Learning with Standard NC 6 Instance with 6 Cores, 56GiB RAM, 1 NVIDIA Tesla K80 (11GiB GPU RAM) and 380GiB Disk space. The configuration on which we have trained is not enough based on the EfficientNet architecture. To load the model on GPU, we have resized the image and reduced the batch size. The accuracy that we have achieved in Table 3 could be improved if we trained the B7 with an image resolution of 640. We are using the ensemble methodology, and it is expected that the bigger the ensemble, the more stable the accuracy score. To get a more stable accuracy score, we have proposed 18 different configurations (Table 4), which can be used to achieve a better result on the skin lesion dataset. The configuration is chosen while considering the model diversity that included backbone architecture and different targets. 
 
 |     Model    |     Backbone    |     Target    |     Input    |     Resize    |     Metadata    |     Warmup LR    |     Epochs    |
 |--------------|-----------------|---------------|--------------|---------------|-----------------|------------------|---------------|
@@ -290,11 +321,17 @@ The main drawback of the project is the computation power. The model is trained 
 |     17       |     SE_X101     |     9c        |     768      |     640       |                 |     3e-5         |     15        |
 |     18       |     Nest 101    |     9c        |     768      |     640       |                 |     2e-5         |     15        |
 
-*Table 3, Proposed training configuration*
+*Table 4, Proposed training configuration*
 
-As proposed in Table 3, all the Models have nine classes except Model 9, which has four categories. The image should be read from the disk, dimension "Input", and then resized into the "Resize" dimension before passing into CNN. "Warmup LR" is the learning rate for the Cosine decay warmup epoch. Except Model 1 all the model is trained on 15 epochs. 
+As proposed in Table 4, all the Models have nine classes except Model 9, which has four categories. The image should be read from the disk, dimension "Input", and then resized into the "Resize" dimension before passing into CNN. "Warmup LR" is the learning rate for the Cosine decay warmup epoch. Except Model 1 all the model is trained on 15 epochs. 
 
 Secondly, the single GPU takes longer to train with a single epoch of B4, B5 and B7 took 2.5hr, 4.7hr and 5.8hr, respectively. Computation power is a significant drawback with any deeper and broader networks. If more than 7 NVIDIA Tesla V100 GPU is used in mixed precision, the training can be distributed between GPU, reducing the training time. 
+
+Furthermore, CNN model robustness can be increased by the addition of 14 metadata features in some models: **sex**, **age_approx**, 10 one-hot encoded **anatom_site_general_challenge** features, **image_size** in bytes and **n_images**, where **n_images** is the number of all images of that patient in the data (Table 4). The metadata go through two fully connected layers before being concatenated with the CNN features, which then go to the final fully connected layer. The model architecture with metadata is illustrated in Figure 23. In three of four metadata models (Table 4), the two hidden layers have dimensions 512 and 128. In another metadata model, they are 128 and 32. We observe that models with images only perform better than metadata models overall, but the addition of of metadata models in the ensemble provides good model diversity.
+
+![The model architecture of metadata models](./readme_images/23.png)
+
+*Figure 23: The model architecture of metadata models.*
 
 Moreover, we have a train on a very small batch size, which is not ideal for training the model because the smaller batch size is noisy and does not guarantee convergence at global optima. So if more than 7 GPU is used in parallel, then the batch size should be set to 64, which helps to get better generalisation on the dataset. 
 
@@ -308,7 +345,7 @@ Lastly, once we have optimised and train the model. The model should deploy on t
 
 One of the deadliest cancer forms is melanoma, and the proportion of people getting affected by melanoma is increasing rapidly. To make the solution available to the public and dermatologists, we have successfully integrated the optimised model with our CAD system. 
 
-The EfficientNet model is proved to be a better network for the skin cancer dataset. The network can generalise well on the dataset and have higher validation accuracy (Table 2 and Figure 22). Plus, the ensemble of the model helps to reduce model prediction error and biases. The model prediction error can be further reduced if the ensemble is more significant with varied configuration, as proposed in Table 3.
+The EfficientNet model is proved to be a better network for the skin cancer dataset. The network can generalise well on the dataset and have higher validation accuracy (Table 3 and Figure 22). Plus, the ensemble of the model helps to reduce model prediction error and biases. The model prediction error can be further reduced if the ensemble is more significant with varied configuration, as proposed in Table 4.
 
 Along with optimising the training process, an equal amount of time is spent optimising the predictions. Based on the three core pillars of model serving, we have tick two of them: model size and latency. The last pillar (Prediction throughput) comes into account when the predictions are performed online over the internet. The prediction throughput measures how many predictions the system can perform in a given timeframe. The prediction throughput is beyond the project's scope but should be considered when deploying the model on the web. 
 
@@ -323,6 +360,8 @@ Mingxing, T., & Quoc, L. (2019). EfficientNet: Rethinking Model Scaling for Conv
 SIIM-ISIC Melanoma Classification. (2020). Identify melanoma in lesion images. Retrieved March 20, 2021, from https://www.kaggle.com/c/siim-isic-melanoma-classification
 
 Tong, H., Zhi, Z., Hang, Z., Zhongyue, Z., Junyuan, X., Mu, L. (2018). Bag of Tricks for Image Classification with Convolutional Neural Networks. https://arxiv.org/abs/1812.01187
+
+Qishen, H., Bo, L., Fuxu L. (2020). Identifying Melanoma Images using EfficientNet Ensemble: Winning Solution to the SIIM-ISIC Melanoma Classification Challenge. https://arxiv.org/abs/2010.05351
 
 # Credits
 This project cannot be completed without you guys **Yogesh Babu Krishnakumar** [@github/13505538-Yogesh](https://github.com/13505538-Yogesh) and **Wilson Lukmanjaya** [@github/WLukmanjaya](https://github.com/WLukmanjaya). Thanks for your support :D
