@@ -46,7 +46,7 @@ Total images in Validation set Ground Truth set 2019:  193
 
 ***Note: Processed dataset can be directly downloaded from the [Kaggle Discussions](https://www.kaggle.com/c/siim-isic-melanoma-classification/discussion/164092)***
 
-### [Sample Images From Dataset](./Data/Sample%20Images/../Sample%20Images/ISIC_0015719.jpg)
+### [Sample Images From Dataset](./Data/Sample%20Images/)
 
 Figure 3 is labelled as benign melanoma in the dataset.
 
@@ -102,6 +102,7 @@ The fact that diagnosis was the target to predict in last year's competition (in
 This means that the last layer of our classification model has 9-dimensional output. It is trained with cross entropy loss. 
 
 ## Data Augmentation
+
 In a small size dataset, image augmentation is required to avoid overfitting the training dataset. After data aggregation, we have around 46k images in the training set. The dataset contains significant class imbalance, with most of the classes have an **"Unknown"** category (Table 2). We have defined our augmentation pipeline to deal with the class imbalance. The augmentation that helps to improve the prediction accuracy of the model is selected. The selected augmentation are as follows:
 1. **Transpose**: A spatial level transformation that transposes image by swapping rows and columns.
 2. **Flip**: A spatial level transformation that flip image either/both horizontally and/or vertically. Images are randomly flipped either horizontally or vertically to make the model more robust.
@@ -127,6 +128,8 @@ Figure 5 illustrates the before and after augmented image. The augmentation is a
 *Figure 5 Training set augmentation.*
 
 After the data pre-processing and data augmentation, we have around 46,425 images in the training set, 11,606 images in the validation set and 10,875 images in the testing set. The training set is divided into an 80/20 ratio where 80% is used for training and 20% as a validation set.
+
+***You can view more Augmented samples under [`./Data/Augmented Sample Images`](./Data/Augmented%20Sample%20Images/)***
 
 # Overview of the Architecture
 The project contains two flow diagrams. Figure 6 shows the model training pipeline, while Figure 7 shows the web UI flow. The first step after downloading the data is to clean and combine the data (Figure 6). The missing values in the patient demographic are imputed with the average values as the ratio of missing values is less than 5% in the overall dataset. The provided skin lesion images are of higher resolution, and it is not ideal for training the network on the high-resolution images (Figure 3 and 4). In the data pre-processing steps, all images are cropped into 768x786 and 512x512 resolution to reduce random noise on the edges of the image.
@@ -163,8 +166,11 @@ Scaling width, depth and resolution improve network accuracy. However, it quickl
 
 *Figure 9, Accuracy saturation when scaling on a single dimension [(Mingxing & Quoc, 2019)](https://arxiv.org/pdf/1905.11946.pdf)*
 
-EfficientNet used compound scaling (Figure 8), which uniformly scales the network's width, depth, and resolution. Among the different EfficientNet, EfficientNetB0 is the baseline network obtained by doing **Neural Architecture Search (NAS)**. EfficientNetB1 to B7 is built upon the baseline network having a different value of compound scaling.
+EfficientNet used compound scaling (Figure 8), which uniformly scales the network's width, depth, and resolution. Among the different EfficientNet, EfficientNetB0 is the baseline network obtained by doing **Neural Architecture Search (NAS)**. EfficientNetB1 to B7 is built upon the baseline network having a different value of compound scaling. 
+
 **We have chosen to use EfficientNet B4, B5 and B7 as these model achieved start-of-the-art 84.4% top-1/ 97.1% top 5 accuracies (Mingxing & Quoc, 2019) on the ImageNet competition.**
+
+***You can view the CNN model visualisation under [Model Visualisation](./Model%20Visualisation/)***
 
 ## GUI Design
 To tackle the challenge of identifying skin cancer from skin lesions, we have to build a predictive model for **Computer-Aided Diagnosis (CAD)**. Taking the skin lesions image and patient demographic information as input, we have developed a prototype web application that can help dermatologists interpret skin lesion images.
