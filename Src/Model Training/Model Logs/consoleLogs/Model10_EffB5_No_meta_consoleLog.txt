@@ -1,0 +1,162 @@
+####################### Hyper Parameter #################################
+
+{'backbone_model': <function EfficientNetB5 at 0x7f22623ab280>,
+ 'early_stop': 10,
+ 'epoch': 15,
+ 'image_size': 448,
+ 'learning_rate_base': 3e-05,
+ 'num_class': 9,
+ 'save_model': 'Model10_EffB5_No_meta.hdf5',
+ 'seed': 42,
+ 'test_batch_size': 1,
+ 'train_batch_size': 4,
+ 'training_sample_count': 58031,
+ 'validation_batch_size': 4,
+ 'warmup_epoch': 1,
+ 'warmup_learning_rate': 3e-05}
+
+Image Shape: (448, 448, 3)
+Total training steps in Warmup: 217616
+Number of Warmup Batch: 14507
+
+
+Train Label shape:  (58031, 2)
+Test Label shape:  (10875, 1)
+2021-05-07 22:52:06.977485: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcuda.so.1
+2021-05-07 22:52:07.019531: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1716] Found device 0 with properties: 
+pciBusID: 0001:00:00.0 name: Tesla K80 computeCapability: 3.7
+coreClock: 0.8235GHz coreCount: 13 deviceMemorySize: 11.17GiB deviceMemoryBandwidth: 223.96GiB/s
+2021-05-07 22:52:07.019582: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.10.1
+2021-05-07 22:52:07.021452: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcublas.so.10
+2021-05-07 22:52:07.023208: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcufft.so.10
+2021-05-07 22:52:07.023507: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcurand.so.10
+2021-05-07 22:52:07.025584: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcusolver.so.10
+2021-05-07 22:52:07.026732: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcusparse.so.10
+2021-05-07 22:52:07.034923: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudnn.so.7
+2021-05-07 22:52:07.036520: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1858] Adding visible gpu devices: 0
+2021-05-07 22:52:07.036868: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN)to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2021-05-07 22:52:07.044983: I tensorflow/core/platform/profile_utils/cpu_utils.cc:104] CPU Frequency: 2596990000 Hz
+2021-05-07 22:52:07.045804: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7f2208028150 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2021-05-07 22:52:07.045827: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+2021-05-07 22:52:07.186832: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x55e4993ed430 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+2021-05-07 22:52:07.186870: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Tesla K80, Compute Capability 3.7
+2021-05-07 22:52:07.187765: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1716] Found device 0 with properties: 
+pciBusID: 0001:00:00.0 name: Tesla K80 computeCapability: 3.7
+coreClock: 0.8235GHz coreCount: 13 deviceMemorySize: 11.17GiB deviceMemoryBandwidth: 223.96GiB/s
+2021-05-07 22:52:07.187817: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.10.1
+2021-05-07 22:52:07.187931: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcublas.so.10
+2021-05-07 22:52:07.188002: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcufft.so.10
+2021-05-07 22:52:07.188055: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcurand.so.10
+2021-05-07 22:52:07.188102: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcusolver.so.10
+2021-05-07 22:52:07.188140: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcusparse.so.10
+2021-05-07 22:52:07.188179: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudnn.so.7
+2021-05-07 22:52:07.190071: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1858] Adding visible gpu devices: 0
+2021-05-07 22:52:07.190124: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.10.1
+2021-05-07 22:52:07.574906: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1257] Device interconnect StreamExecutor with strength 1 edge matrix:
+2021-05-07 22:52:07.574957: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1263]      0 
+2021-05-07 22:52:07.574972: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1276] 0:   N 
+2021-05-07 22:52:07.576766: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1402] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 10626 MB memory) -> physical GPU (device: 0, name: Tesla K80, pci bus id: 0001:00:00.0, compute capability: 3.7)
+/anaconda/envs/azureml_py38/lib/python3.8/site-packages/albumentations/augmentations/transforms.py:2610: UserWarning: blur_limit and sigma_limit minimum value can not be both equal to 0. blur_limit minimum value changed to 3.
+  warnings.warn(
+Found 46425 non-validated image filenames belonging to 9 classes.
+Found 11606 non-validated image filenames belonging to 9 classes.
+Do you want to start training the mode? [y]es OR [n]o: y
+
+
+---------------- Staring the Training Process... --------------- 
+Epoch 1/15
+2021-05-07 22:52:41.598121: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcublas.so.10
+2021-05-07 22:52:42.194374: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudnn.so.7
+2021-05-07 22:52:43.933915: W tensorflow/core/common_runtime/bfc_allocator.cc:246] Allocator (GPU_0_bfc) ran out of memory trying to allocate 3.40GiB with freed_by_count=0. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2021-05-07 22:52:44.002476: W tensorflow/core/common_runtime/bfc_allocator.cc:246] Allocator (GPU_0_bfc) ran out of memory trying to allocate 3.42GiB with freed_by_count=0. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2021-05-07 22:52:44.254652: W tensorflow/core/common_runtime/bfc_allocator.cc:246] Allocator (GPU_0_bfc) ran out of memory trying to allocate 3.40GiB with freed_by_count=0. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2021-05-07 22:52:44.272844: W tensorflow/core/common_runtime/bfc_allocator.cc:246] Allocator (GPU_0_bfc) ran out of memory trying to allocate 3.39GiB with freed_by_count=0. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2021-05-07 22:52:44.361065: W tensorflow/core/common_runtime/bfc_allocator.cc:246] Allocator (GPU_0_bfc) ran out of memory trying to allocate 3.40GiB with freed_by_count=0. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2021-05-07 22:52:44.370967: W tensorflow/core/common_runtime/bfc_allocator.cc:246] Allocator (GPU_0_bfc) ran out of memory trying to allocate 3.42GiB with freed_by_count=0. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+11606/11606 [==============================] - ETA: 0s - loss: 1.2541 - accuracy: 0.5382         
+Epoch 00001: saving model to ./saveModel/Model10_EffB5_No_meta.hdf5
+11606/11606 [==============================] - 16987s 1s/step - loss: 1.2541 - accuracy: 0.5382 - val_loss: 0.5228 - val_accuracy: 0.7970
+Epoch 2/15
+11606/11606 [==============================] - ETA: 0s - loss: 0.9252 - accuracy: 0.6746   ^A^[^[^[^[^[^[^[^[^A^A
+Epoch 00002: saving model to ./saveModel/Model10_EffB5_No_meta.hdf5
+11606/11606 [==============================] - 17213s 1s/step - loss: 0.9252 - accuracy: 0.6746 - val_loss: 0.5872 - val_accuracy: 0.7933
+Epoch 3/15
+11606/11606 [==============================] - ETA: 0s - loss: 0.8218 - accuracy: 0.7121     
+Epoch 00003: saving model to ./saveModel/Model10_EffB5_No_meta.hdf5
+11606/11606 [==============================] - 16910s 1s/step - loss: 0.8218 - accuracy: 0.7121 - val_loss: 0.3970 - val_accuracy: 0.8610
+Epoch 4/15
+11606/11606 [==============================] - ETA: 0s - loss: 0.7526 - accuracy: 0.7367     
+Epoch 00004: saving model to ./saveModel/Model10_EffB5_No_meta.hdf5
+11606/11606 [==============================] - 16904s 1s/step - loss: 0.7526 - accuracy: 0.7367 - val_loss: 0.4676 - val_accuracy: 0.8397
+Epoch 5/15
+11606/11606 [==============================] - ETA: 0s - loss: 0.6898 - accuracy: 0.7595     
+Epoch 00005: saving model to ./saveModel/Model10_EffB5_No_meta.hdf5
+11606/11606 [==============================] - 16890s 1s/step - loss: 0.6898 - accuracy: 0.7595 - val_loss: 0.3638 - val_accuracy: 0.8796
+Epoch 6/15
+11606/11606 [==============================] - ETA: 0s - loss: 0.6538 - accuracy: 0.7722     
+Epoch 00006: saving model to ./saveModel/Model10_EffB5_No_meta.hdf5
+11606/11606 [==============================] - 16925s 1s/step - loss: 0.6538 - accuracy: 0.7722 - val_loss: 0.3115 - val_accuracy: 0.8963
+Epoch 7/15
+11606/11606 [==============================] - ETA: 0s - loss: 0.6143 - accuracy: 0.7833     
+Epoch 00007: saving model to ./saveModel/Model10_EffB5_No_meta.hdf5
+11606/11606 [==============================] - 16990s 1s/step - loss: 0.6143 - accuracy: 0.7833 - val_loss: 0.2872 - val_accuracy: 0.9115
+Epoch 8/15
+11606/11606 [==============================] - ETA: 0s - loss: 0.5817 - accuracy: 0.7955     
+Epoch 00008: saving model to ./saveModel/Model10_EffB5_No_meta.hdf5
+11606/11606 [==============================] - 16884s 1s/step - loss: 0.5817 - accuracy: 0.7955 - val_loss: 0.3992 - val_accuracy: 0.8643
+Epoch 9/15
+11606/11606 [==============================] - ETA: 0s - loss: 0.5517 - accuracy: 0.8055     
+Epoch 00009: saving model to ./saveModel/Model10_EffB5_No_meta.hdf5
+11606/11606 [==============================] - 16966s 1s/step - loss: 0.5517 - accuracy: 0.8055 - val_loss: 0.3891 - val_accuracy: 0.8728
+Epoch 10/15
+11606/11606 [==============================] - ETA: 0s - loss: 0.5187 - accuracy: 0.8167     
+Epoch 00010: saving model to ./saveModel/Model10_EffB5_No_meta.hdf5
+11606/11606 [==============================] - 17009s 1s/step - loss: 0.5187 - accuracy: 0.8167 - val_loss: 0.2946 - val_accuracy: 0.9029
+Epoch 11/15
+11606/11606 [==============================] - ETA: 0s - loss: 0.4929 - accuracy: 0.8268     
+Epoch 00011: saving model to ./saveModel/Model10_EffB5_No_meta.hdf5
+11606/11606 [==============================] - 16984s 1s/step - loss: 0.4929 - accuracy: 0.8268 - val_loss: 0.2598 - val_accuracy: 0.9215
+Epoch 12/15
+11606/11606 [==============================] - ETA: 0s - loss: 0.4680 - accuracy: 0.8347     
+Epoch 00012: saving model to ./saveModel/Model10_EffB5_No_meta.hdf5
+11606/11606 [==============================] - 17036s 1s/step - loss: 0.4680 - accuracy: 0.8347 - val_loss: 0.2738 - val_accuracy: 0.9115
+Epoch 13/15
+ 9487/11606 [=======================>......] - ETA: 48:22 - loss: 0.4421 - accuracy: 0.8437[reconnecting terminal]
+
+
+[Reconnection succeeded]
+10251/11606 [=========================>....] - ETA: 30:56 - loss: 0.4441 - accuracy: 0.8423[reconnecting terminal]
+
+
+[Reconnection succeeded]
+11606/11606 [==============================] - ETA: 0s - loss: 0.4422 - accuracy: 0.8433   
+Epoch 00013: saving model to ./saveModel/Model10_EffB5_No_meta.hdf5
+11606/11606 [==============================] - 17012s 1s/step - loss: 0.4422 - accuracy: 0.8433 - val_loss: 0.2417 - val_accuracy: 0.9255
+Epoch 14/15
+ 8316/11606 [====================>.........] - ETA: 1:15:08 - loss: 0.4243 - accuracy: 0.8483[reconnecting terminal]
+
+
+[Reconnection succeeded]
+11606/11606 [==============================] - ETA: 0s - loss: 0.4265 - accuracy: 0.8488     
+Epoch 00014: saving model to ./saveModel/Model10_EffB5_No_meta.hdf5
+11606/11606 [==============================] - 16925s 1s/step - loss: 0.4265 - accuracy: 0.8488 - val_loss: 0.2347 - val_accuracy: 0.9289
+Epoch 15/15
+11606/11606 [==============================] - ETA: 0s - loss: 0.4073 - accuracy: 0.8560     
+Epoch 00015: saving model to ./saveModel/Model10_EffB5_No_meta.hdf5
+11606/11606 [==============================] - 17137s 1s/step - loss: 0.4073 - accuracy: 0.8560 - val_loss: 0.2319 - val_accuracy: 0.9292
+
+ ----------------- Model is trained --------------------------
+
+------ Saving Training and Validation Plot --------
+Found 10875 non-validated image filenames.
+
+------ Predicting on Testset --------
+10875/10875 [==============================] - 1250s 115ms/step
+
+---------------------- Completed Model Training ---------------------------
+        ------------------------- Stopping the Azure Instance ------------------------
+[reconnecting terminal]
+
+
+[Reconnection failed, terminal is closed. Please close tab and retry]

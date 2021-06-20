@@ -1,0 +1,70 @@
+Found 46425 non-validated image filenames belonging to 9 classes.
+Found 11606 non-validated image filenames belonging to 9 classes.
+Do you want to start training the mode? [y]es OR [n]o: y
+Staring the Training Process...
+Epoch 1/15
+2021-05-05 11:37:57.593262: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcublas.so.10
+2021-05-05 11:38:05.035312: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudnn.so.7
+5803/5803 [==============================] - ETA: 0s - loss: 1.3603 - accuracy: 0.4911     
+
+Epoch 00001: saving model to ./saveModel/Model2_EffB4_No_meta.hdf5
+5803/5803 [==============================] - 8762s 2s/step - loss: 1.3603 - accuracy: 0.4911 - val_loss: 0.6638 - val_accuracy: 0.7123
+Epoch 2/15
+5803/5803 [==============================] - ETA: 0s - loss: 0.9748 - accuracy: 0.6522     
+Epoch 00002: saving model to ./saveModel/Model2_EffB4_No_meta.hdf5
+5803/5803 [==============================] - 8739s 2s/step - loss: 0.9748 - accuracy: 0.6522 - val_loss: 0.5761 - val_accuracy: 0.7851
+Epoch 3/15
+5803/5803 [==============================] - ETA: 0s - loss: 0.8696 - accuracy: 0.6909     
+Epoch 00003: saving model to ./saveModel/Model2_EffB4_No_meta.hdf5
+5803/5803 [==============================] - 9041s 2s/step - loss: 0.8696 - accuracy: 0.6909 - val_loss: 0.5102 - val_accuracy: 0.8140
+Epoch 4/15
+5803/5803 [==============================] - ETA: 0s - loss: 0.8103 - accuracy: 0.7136     
+Epoch 00004: saving model to ./saveModel/Model2_EffB4_No_meta.hdf5
+5803/5803 [==============================] - 8946s 2s/step - loss: 0.8103 - accuracy: 0.7136 - val_loss: 0.4427 - val_accuracy: 0.8594
+Epoch 5/15
+5803/5803 [==============================] - ETA: 0s - loss: 0.7622 - accuracy: 0.7308     
+Epoch 00005: saving model to ./saveModel/Model2_EffB4_No_meta.hdf5
+5803/5803 [==============================] - 8800s 2s/step - loss: 0.7622 - accuracy: 0.7308 - val_loss: 0.3178 - val_accuracy: 0.8979
+Epoch 6/15
+5803/5803 [==============================] - ETA: 0s - loss: 0.7273 - accuracy: 0.7428     
+Epoch 00006: saving model to ./saveModel/Model2_EffB4_No_meta.hdf5
+5803/5803 [==============================] - 8763s 2s/step - loss: 0.7273 - accuracy: 0.7428 - val_loss: 0.3552 - val_accuracy: 0.8892
+Epoch 7/15
+5803/5803 [==============================] - ETA: 0s - loss: 0.6947 - accuracy: 0.7536     
+Epoch 00007: saving model to ./saveModel/Model2_EffB4_No_meta.hdf5
+5803/5803 [==============================] - 8753s 2s/step - loss: 0.6947 - accuracy: 0.7536 - val_loss: 0.3446 - val_accuracy: 0.8861
+Epoch 8/15
+5803/5803 [==============================] - ETA: 0s - loss: 0.6617 - accuracy: 0.7656     
+Epoch 00008: saving model to ./saveModel/Model2_EffB4_No_meta.hdf5
+5803/5803 [==============================] - 8748s 2s/step - loss: 0.6617 - accuracy: 0.7656 - val_loss: 0.5021 - val_accuracy: 0.8191
+Epoch 9/15
+5803/5803 [==============================] - ETA: 0s - loss: 0.6341 - accuracy: 0.7731     
+Epoch 00009: saving model to ./saveModel/Model2_EffB4_No_meta.hdf5
+5803/5803 [==============================] - 8724s 2s/step - loss: 0.6341 - accuracy: 0.7731 - val_loss: 0.4126 - val_accuracy: 0.8597
+Epoch 10/15
+5803/5803 [==============================] - ETA: 0s - loss: 0.6119 - accuracy: 0.7830     
+Epoch 00010: saving model to ./saveModel/Model2_EffB4_No_meta.hdf5
+5803/5803 [==============================] - 8772s 2s/step - loss: 0.6119 - accuracy: 0.7830 - val_loss: 0.2818 - val_accuracy: 0.9121
+Epoch 11/15
+5803/5803 [==============================] - ETA: 0s - loss: 0.5951 - accuracy: 0.7898     
+Epoch 00011: saving model to ./saveModel/Model2_EffB4_No_meta.hdf5
+5803/5803 [==============================] - 8886s 2s/step - loss: 0.5951 - accuracy: 0.7898 - val_loss: 0.3289 - val_accuracy: 0.8863
+Epoch 12/15
+5803/5803 [==============================] - ETA: 0s - loss: 0.5679 - accuracy: 0.7985     
+Epoch 00012: saving model to ./saveModel/Model2_EffB4_No_meta.hdf5
+5803/5803 [==============================] - 8660s 1s/step - loss: 0.5679 - accuracy: 0.7985 - val_loss: 0.2770 - val_accuracy: 0.9121
+Epoch 13/15
+5803/5803 [==============================] - ETA: 0s - loss: 0.5496 - accuracy: 0.8043     
+Epoch 00013: saving model to ./saveModel/Model2_EffB4_No_meta.hdf5
+5803/5803 [==============================] - 8942s 2s/step - loss: 0.5496 - accuracy: 0.8043 - val_loss: 0.2601 - val_accuracy: 0.9185
+Epoch 14/15
+5803/5803 [==============================] - ETA: 0s - loss: 0.5357 - accuracy: 0.8096     
+Epoch 00014: saving model to ./saveModel/Model2_EffB4_No_meta.hdf5
+5803/5803 [==============================] - 8833s 2s/step - loss: 0.5357 - accuracy: 0.8096 - val_loss: 0.2764 - val_accuracy: 0.9114
+Epoch 15/15
+1666/5803 [=======>......................] - ETA: 1:31:27 - loss: 0.51667/5803 [=======>......................] - ETA: 1:31:26 - loss: 0.51668/5803 [=======>......................] - ETA: 1:31:25 - loss: 0.55803/5803 [==============================] - ETA: 0s - loss: 0.5217 - accuracy: 0.8135     
+Epoch 00015: saving model to ./saveModel/Model2_EffB4_No_meta.hdf5
+5803/5803 [==============================] - 8786s 2s/step - loss: 0.5217 - accuracy: 0.8135 - val_loss: 0.2591 - val_accuracy: 0.9159
+Found 10875 non-validated image filenames.
+10875/10875 [==============================] - 1386s 127ms/step
+----------------------Completed---------------------------

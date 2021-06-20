@@ -101,7 +101,7 @@ The fact that diagnosis was the target to predict in last year's competition (in
 
 This means that the last layer of our classification model has 9-dimensional output. It is trained with cross entropy loss. 
 
-## Data Augmentation
+## [Data Augmentation](./Notebooks/Data%20Augumentation.ipynb)
 
 In a small size dataset, image augmentation is required to avoid overfitting the training dataset. After data aggregation, we have around 46k images in the training set. The dataset contains significant class imbalance, with most of the classes have an **"Unknown"** category (Table 2). We have defined our augmentation pipeline to deal with the class imbalance. The augmentation that helps to improve the prediction accuracy of the model is selected. The selected augmentation are as follows:
 1. **Transpose**: A spatial level transformation that transposes image by swapping rows and columns.
@@ -148,7 +148,7 @@ The web UI contains five pages, of which four of them are used to explain the pr
 
 *Figure 7 Web UI flow diagram*
 
-## CNN Architecture Design
+## [CNN Architecture Design](./Src/Model%20Training/pre_train.py)
 The project aims to classify skin cancer using skin lesions images. To achieve higher accuracy and results on the classification task, we have used various EfficientNet models. Transfer learning is applied to the EfficientNet models. We have unfrozen all the layer except BatchNormalization to stop the BatchNormalization layer from updating its means and variance statistics. If we train the BatchNormalisation layer, it will destroy what the model has learned, and accuracy will significantly reduce.
 
 ### The reason behind choosing EfficientNet Architecture
@@ -171,6 +171,8 @@ EfficientNet used compound scaling (Figure 8), which uniformly scales the networ
 **We have chosen to use EfficientNet B4, B5 and B7 as these model achieved start-of-the-art 84.4% top-1/ 97.1% top 5 accuracies (Mingxing & Quoc, 2019) on the ImageNet competition.**
 
 ***You can view the CNN model visualisation under [Model Visualisation](./Model%20Visualisation/)***
+
+***To start the training process run [`main_run.py`](./Src/Model%20Training/main_run.py) file.***
 
 ## GUI Design
 To tackle the challenge of identifying skin cancer from skin lesions, we have to build a predictive model for **Computer-Aided Diagnosis (CAD)**. Taking the skin lesions image and patient demographic information as input, we have developed a prototype web application that can help dermatologists interpret skin lesion images.
@@ -243,7 +245,7 @@ The model evaluation and performance on the test and validation images are as fo
 ## Network Configurations
 We have used ensemble terminology to train diverse models and take the average probability ranks of the models to get the final prediction. The model configuration is as follows:
 
-1. **Backbone Pre-trained CNN Model**: *Efficient Net B4, B5 and B7*. We have chosen to use the B4, B5 and B7 variant of the efficient net over B0 as they have achieved higher accuracy on ImageNet competition.
+1. [**Backbone Pre-trained CNN Model**](./Src/Model%20Training/model_param.py): *Efficient Net B4, B5 and B7*. We have chosen to use the B4, B5 and B7 variant of the efficient net over B0 as they have achieved higher accuracy on ImageNet competition.
 2. **Targets**: All the model is trained on nine categories (Table 2).
 
 | **Label** | **Name**                                                                             |
@@ -260,19 +262,19 @@ We have used ensemble terminology to train diverse models and take the average p
 
 *Table 2, Label Name*
 
-3. **Original images are cropped** to *68x768* and *512x512* pixels. To reduce the random noise and black border on the edge of the images (Figure 2)
-4. **Resized image input sizes** to *380x380* and *448x448* pixels. The images are resized to lower resolution due to GPU memory constraints. Otherwise, it was planned to load the images with the original cropped image pixels (Table 4).
-5. **Cosine Decay learning rate** is set to *3e-5* and *1e-5* with *1* **Warmup epoch**. Along with the pre-trained model, we are using Cosine decay with a warmup learning rate scheduler. Warmup strategy gradually increases the learning rate from zero to the initial learning rate during initial **Nth** epochs or **m** batches. Cosine decay is used in conjunction with the warmup learning rate scheduler to decrease the initial learning rate value steadily. Cosine decay is used rather than exponential or steps decay. It reduces the learning rate slowly at the start and end while falling linearly in the middle—cosine decay help to improve the training process (Figure 21).
+3. [**Original images are cropped**](https://www.kaggle.com/c/siim-isic-melanoma-classification/discussion/164092) to *68x768* and *512x512* pixels. To reduce the random noise and black border on the edge of the images (Figure 2)
+4. [**Resized image input sizes**](./Src/Model%20Training/pre_train.py) to *380x380* and *448x448* pixels. The images are resized to lower resolution due to GPU memory constraints. Otherwise, it was planned to load the images with the original cropped image pixels (Table 4).
+5. [**Cosine Decay learning rate**](./Src/Model%20Training/utils.py) is set to *3e-5* and *1e-5* with *1* **Warmup epoch**. Along with the pre-trained model, we are using Cosine decay with a warmup learning rate scheduler. Warmup strategy gradually increases the learning rate from zero to the initial learning rate during initial **Nth** epochs or **m** batches. Cosine decay is used in conjunction with the warmup learning rate scheduler to decrease the initial learning rate value steadily. Cosine decay is used rather than exponential or steps decay. It reduces the learning rate slowly at the start and end while falling linearly in the middle—cosine decay help to improve the training process (Figure 21).
 
 ![Cosine Decay (Tong et al., 2018)](./readme_images/21.png)
 
 *Figure 21, Cosine Decay [(Tong et al., 2018)](https://arxiv.org/pdf/1812.01187.pdf)*
 
-6. **Optimiser**: *Adam*. Adam combined the best properties of RMSProp and AdaGrad to handle the sparse gradients on the noisy problems. As we have sparse data, Adam is used because of the adaptive learning rate.
-7. **Training Epoch**: *15*. As we are using the ensemble methodology, we have trained all the variants of the EfficientNet model on 15 epoch.
-8. **Training and validation batch size** of *8 for B4* and *4 for B5 and B7* is used. The reason behind choosing the small batch size is due to GPU memory constraints. Otherwise, we have planned to use a batch size of 64 for the training and validation set (Table 4).
+6. [**Optimiser**](./Src/Model%20Training/model_param.py): *Adam*. Adam combined the best properties of RMSProp and AdaGrad to handle the sparse gradients on the noisy problems. As we have sparse data, Adam is used because of the adaptive learning rate.
+7. [**Training Epoch**](./Src/Model%20Training/model_param.py): *15*. As we are using the ensemble methodology, we have trained all the variants of the EfficientNet model on 15 epoch.
+8. [**Training and validation batch size**](./Src/Model%20Training/model_param.py) of *8 for B4* and *4 for B5 and B7* is used. The reason behind choosing the small batch size is due to GPU memory constraints. Otherwise, we have planned to use a batch size of 64 for the training and validation set (Table 4).
 
-## Network Evaluation
+## [Network Evaluation](./Src/Model%20Training/Model%20Logs/)
 Almost all the EfficientNet model is getting the similar training and validation accuracy (Table 3). Based on the inference result in Table 3, the Efficient Net B5 model is getting the higher accuracy on the dataset. The final ensemble is a simple average of the three models' probability ranks. The model probability prediction is transformed to [0, 1] before averaging.
 
 |     Model No    |  Backbone | Image Input Size |   Resize   | Batch Size | Training Accuracy | Validation Accuracy |
@@ -300,6 +302,7 @@ The raw weights are converted into Open Neural Network Exchange (ONNX). The key 
 The optimised ONNX model is then deployed onto our CAD system, which can better support dermatologists' clinical work. The CAD system takes skin lesion and patient demographic as input and outputs the probability among the nine classes (Table 2).  
 
 ### Trained Weights
+
 We have published our trained weigths of the model settings that are mentioned above in the [Kaggle](https://www.kaggle.com/tirth27/melanoma-classification-kerasonnx-model-weight).
 
 ## Limitations, Future Extension, and Improvements
