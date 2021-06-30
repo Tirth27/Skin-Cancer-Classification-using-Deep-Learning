@@ -1,5 +1,5 @@
 # Skin Cancer Classification using Deep Learning
-### [:computer: Presentation Link](https://youtu.be/OEcFbeO88fQ)
+## [:film_projector: Presentation Link](https://youtu.be/OEcFbeO88fQ) | [:computer: Website](http://20.70.244.24/)
 
 
 # Abstract
