@@ -47,7 +47,7 @@ Total images in Validation set Ground Truth set 2019:  193
 ```
 *Figure 2: Training and testing images in 2020, 2019 and 2018 competition.*
 
-***Note: Processed dataset can be directly downloaded from the [Kaggle Discussions](https://www.kaggle.com/c/siim-isic-melanoma-classification/discussion/164092)***
+#### ***Note: Processed dataset can be directly downloaded from the [Kaggle Discussions](https://www.kaggle.com/c/siim-isic-melanoma-classification/discussion/164092)***
 
 ### [Sample Images From Dataset](./Data/Sample%20Images/)
 
@@ -132,7 +132,7 @@ Figure 5 illustrates the before and after augmented image. The augmentation is a
 
 After the data pre-processing and data augmentation, we have around 46,425 images in the training set, 11,606 images in the validation set and 10,875 images in the testing set. The training set is divided into an 80/20 ratio where 80% is used for training and 20% as a validation set.
 
-***You can view more Augmented samples under [`./Data/Augmented Sample Images`](./Data/Augmented%20Sample%20Images/)***
+####  ***You can view more Augmented samples under [`./Data/Augmented Sample Images`](./Data/Augmented%20Sample%20Images/)***
 
 # Overview of the Architecture
 The project contains two flow diagrams. Figure 6 shows the model training pipeline, while Figure 7 shows the web UI flow. The first step after downloading the data is to clean and combine the data (Figure 6). The missing values in the patient demographic are imputed with the average values as the ratio of missing values is less than 5% in the overall dataset. The provided skin lesion images are of higher resolution, and it is not ideal for training the network on the high-resolution images (Figure 3 and 4). In the data pre-processing steps, all images are cropped into 768x786 and 512x512 resolution to reduce random noise on the edges of the image.
@@ -173,16 +173,14 @@ EfficientNet used compound scaling (Figure 8), which uniformly scales the networ
 
 **We have chosen to use EfficientNet B4, B5 and B7 as these model achieved start-of-the-art 84.4% top-1/ 97.1% top 5 accuracies (Mingxing & Quoc, 2019) on the ImageNet competition.**
 
-***You can view the CNN model visualisation under [Model Visualisation](./Model%20Visualisation/)***
+####  ***You can view the CNN model visualisation under [Model Visualisation.](./Model%20Visualisation/)***
 
+####  ***To start the training process by run [`./Src/Model%20Training/main_run.py`](./Src/Model%20Training/main_run.py) file. Also, to create a Compute Instance on Azure refer to [`./Src/README.md`](./src/README.md)***
 
-
-***To start the training process by run [`./Src/Model%20Training/main_run.py`](./Src/Model%20Training/main_run.py) file. Also, to create a Compute Instance on Azure refer to ./Src/README.md***
-
-## GUI Design
+## [GUI Design](http://20.70.244.24/) 
 To tackle the challenge of identifying skin cancer from skin lesions, we have to build a predictive model for **Computer-Aided Diagnosis (CAD)**. Taking the skin lesions image and patient demographic information as input, we have developed a prototype web application that can help dermatologists interpret skin lesion images.
 
-The web GUI consists of five main pages, of which four of them are used to explain the benefit of using the tool and way to reduce the death caused by skin cancer. The inference page named **"Our Solution"** is where the inference is performed using ensemble methodology.
+The web GUI consists of five main pages, of which four of them are used to explain the benefit of using the tool and way to reduce the death caused by skin cancer. The inference page named [**"Our Solution"**](http://20.70.244.24/test) is where the inference is performed using ensemble methodology.
 
 The main page introduces the user to the approach we have chosen to scale across the domain where we merge the deep learning technology with the health care sector. Also, the main pages have four main sections (Figure 10, 11, 12 and 13). We have added button on the navigation bar for user convenience, which takes the user to the specified section.
 
@@ -190,7 +188,7 @@ The main page introduces the user to the approach we have chosen to scale across
 
 *Figure 10 Main page (Section one)*
 
-We introduce the end-user to the melanoma and its severity in section two (Figure 11). Section two provides a generalised introduction of melanoma that the user can easily understand. Plus, we have provided a **"Explore"** button that redirects the user to the **"Info"** page (Figure 12). The information page provides in-depth information on the severity of skin cancer with its symptoms. The information page (Figure 12) is designed to keep the curious user in mind who wants to understand the problem profoundly.
+We introduce the end-user to the melanoma and its severity in section two (Figure 11). Section two provides a generalised introduction of melanoma that the user can easily understand. Plus, we have provided a **"Explore"** button that redirects the user to the [**"Info"**](http://20.70.244.24/info) page (Figure 12). The information page provides in-depth information on the severity of skin cancer with its symptoms. The information page (Figure 12) is designed to keep the curious user in mind who wants to understand the problem profoundly.
 
 ![Main page](./readme_images/11.png)
 
@@ -200,7 +198,7 @@ We introduce the end-user to the melanoma and its severity in section two (Figur
 
 *Figure 12 Info Page*
 
-Once the user is familiar with skin cancer, we took the user to section three (Figure 13), showing how deep learning can help dermatologist in their clinical work. When the user clicks on the **"Explore"** button, they are redirected to the **"Tools"** page. The tools page will make the user familiar with deep learning and how it can help to reduce the death caused by melanoma skin cancer.
+Once the user is familiar with skin cancer, we took the user to section three (Figure 13), showing how deep learning can help dermatologist in their clinical work. When the user clicks on the **"Explore"** button, they are redirected to the [**"Tools"**](http://20.70.244.24/tools) page. The tools page will make the user familiar with deep learning and how it can help to reduce the death caused by melanoma skin cancer.
 
 ![Main page](./readme_images/13.png)
 
@@ -210,9 +208,9 @@ Once the user is familiar with skin cancer, we took the user to section three (F
 
 *Figure 14 Tools Page*
 
-In the last section of the main page (Figure 15), we introduce our CAD system. When **"Explore Our Solution"** is click, it will bring the end-user to the **"Our Solution"** page. The **"Our Solution"** page is where the inference of the skin lesion image is performed (Figure 16). The minimal materialised design is chosen, which looks attractive and encourage end-user to use the tool repeatedly.
+In the last section of the main page (Figure 15), we introduce our CAD system. When **"Explore Our Solution"** is click, it will bring the end-user to the [**"Our Solution"**](http://20.70.244.24/test) page. The [**"Our Solution"**](http://20.70.244.24/test) page is where the inference of the skin lesion image is performed (Figure 16). The minimal materialised design is chosen, which looks attractive and encourage end-user to use the tool repeatedly.
 
-The **"Our Solution"** page contains two main things. Firstly, a user needs to add the patient detail under the **"Fill Patient Detail"** section for which the inference is performed. Then a user needs to upload the skin lesion image. The validation is performed on the client-side using JQuery, and it will not allow the end-user to submit the detail until all the information is valid. The validation is performed on the client-side to reduce the server load.
+The [**"Our Solution"**](http://20.70.244.24/test) page contains two main things. Firstly, a user needs to add the patient detail under the **"Fill Patient Detail"** section for which the inference is performed. Then a user needs to upload the skin lesion image. The validation is performed on the client-side using JQuery, and it will not allow the end-user to submit the detail until all the information is valid. The validation is performed on the client-side to reduce the server load.
 
 ![Main page](./readme_images/15.png)
 
@@ -238,7 +236,7 @@ Moreover, we have also thought about patient privacy, and for the same reason, n
 
 *Figure 19 Generated PDF report*
 
-Lastly, we have created an **"About Us"** page (Figure 20). The **"About Us"** page shows the core value of individual team members and their effort to deliver the end product.
+Lastly, we have created an [**"About Us"**](http://20.70.244.24/aboutus) page (Figure 20). The [**"About Us"**](http://20.70.244.24/aboutus) page shows the core value of individual team members and their effort to deliver the end product.
 
 ![About Us page](./readme_images/20.png)
 
