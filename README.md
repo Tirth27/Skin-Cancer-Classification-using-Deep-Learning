@@ -1,5 +1,5 @@
 # Skin Cancer Classification using Deep Learning
-## [:film_projector: Presentation Link](https://youtu.be/OEcFbeO88fQ) | [:computer: Website](http://20.70.244.24/) | [:pencil2:How to use the tool](https://youtu.be/60tc351UIxw)
+## [:film_projector: Presentation Link](https://youtu.be/OEcFbeO88fQ) | [:pencil2:How to use the tool](https://youtu.be/60tc351UIxw)
 
 
 # Abstract
@@ -177,10 +177,10 @@ EfficientNet used compound scaling (Figure 8), which uniformly scales the networ
 
 ####  ***To start the training process by run [`./Src/Model%20Training/main_run.py`](./Src/Model%20Training/main_run.py) file. Also, to create a Compute Instance on Azure refer to [`./Src/README.md`](https://github.com/Tirth27/Skin-Cancer-Classification-using-Deep-Learning/blob/main/Src/README.md)***
 
-## [GUI Design](http://20.70.244.24/) 
+## GUI Design]
 To tackle the challenge of identifying skin cancer from skin lesions, we have to build a predictive model for **Computer-Aided Diagnosis (CAD)**. Taking the skin lesions image and patient demographic information as input, we have developed a prototype web application that can help dermatologists interpret skin lesion images.
 
-The web GUI consists of five main pages, of which four of them are used to explain the benefit of using the tool and way to reduce the death caused by skin cancer. The inference page named [**"Our Solution"**](http://20.70.244.24/test) is where the inference is performed using ensemble methodology.
+The web GUI consists of five main pages, of which four of them are used to explain the benefit of using the tool and way to reduce the death caused by skin cancer. The inference page named **"Our Solution"** is where the inference is performed using ensemble methodology.
 
 The main page introduces the user to the approach we have chosen to scale across the domain where we merge the deep learning technology with the health care sector. Also, the main pages have four main sections (Figure 10, 11, 12 and 13). We have added button on the navigation bar for user convenience, which takes the user to the specified section.
 
@@ -188,7 +188,7 @@ The main page introduces the user to the approach we have chosen to scale across
 
 *Figure 10 Main page (Section one)*
 
-We introduce the end-user to the melanoma and its severity in section two (Figure 11). Section two provides a generalised introduction of melanoma that the user can easily understand. Plus, we have provided a **"Explore"** button that redirects the user to the [**"Info"**](http://20.70.244.24/info) page (Figure 12). The information page provides in-depth information on the severity of skin cancer with its symptoms. The information page (Figure 12) is designed to keep the curious user in mind who wants to understand the problem profoundly.
+We introduce the end-user to the melanoma and its severity in section two (Figure 11). Section two provides a generalised introduction of melanoma that the user can easily understand. Plus, we have provided a **"Explore"** button that redirects the user to the **"Info"** page (Figure 12). The information page provides in-depth information on the severity of skin cancer with its symptoms. The information page (Figure 12) is designed to keep the curious user in mind who wants to understand the problem profoundly.
 
 ![Main page](./readme_images/11.png)
 
@@ -198,7 +198,7 @@ We introduce the end-user to the melanoma and its severity in section two (Figur
 
 *Figure 12 Info Page*
 
-Once the user is familiar with skin cancer, we took the user to section three (Figure 13), showing how deep learning can help dermatologist in their clinical work. When the user clicks on the **"Explore"** button, they are redirected to the [**"Tools"**](http://20.70.244.24/tools) page. The tools page will make the user familiar with deep learning and how it can help to reduce the death caused by melanoma skin cancer.
+Once the user is familiar with skin cancer, we took the user to section three (Figure 13), showing how deep learning can help dermatologist in their clinical work. When the user clicks on the **"Explore"** button, they are redirected to the **"Tools"** page. The tools page will make the user familiar with deep learning and how it can help to reduce the death caused by melanoma skin cancer.
 
 ![Main page](./readme_images/13.png)
 
@@ -208,9 +208,9 @@ Once the user is familiar with skin cancer, we took the user to section three (F
 
 *Figure 14 Tools Page*
 
-In the last section of the main page (Figure 15), we introduce our CAD system. When **"Explore Our Solution"** is click, it will bring the end-user to the [**"Our Solution"**](http://20.70.244.24/test) page. The [**"Our Solution"**](http://20.70.244.24/test) page is where the inference of the skin lesion image is performed (Figure 16). The minimal materialised design is chosen, which looks attractive and encourage end-user to use the tool repeatedly.
+In the last section of the main page (Figure 15), we introduce our CAD system. When **"Explore Our Solution"** is click, it will bring the end-user to the **"Our Solution"** page. The **"Our Solution"** page is where the inference of the skin lesion image is performed (Figure 16). The minimal materialised design is chosen, which looks attractive and encourage end-user to use the tool repeatedly.
 
-The [**"Our Solution"**](http://20.70.244.24/test) page contains two main things. Firstly, a user needs to add the patient detail under the **"Fill Patient Detail"** section for which the inference is performed. Then a user needs to upload the skin lesion image. The validation is performed on the client-side using JQuery, and it will not allow the end-user to submit the detail until all the information is valid. The validation is performed on the client-side to reduce the server load.
+The **"Our Solution"** page contains two main things. Firstly, a user needs to add the patient detail under the **"Fill Patient Detail"** section for which the inference is performed. Then a user needs to upload the skin lesion image. The validation is performed on the client-side using JQuery, and it will not allow the end-user to submit the detail until all the information is valid. The validation is performed on the client-side to reduce the server load.
 
 ![Main page](./readme_images/15.png)
 
@@ -236,7 +236,7 @@ Moreover, we have also thought about patient privacy, and for the same reason, n
 
 *Figure 19 Generated PDF report*
 
-Lastly, we have created an [**"About Us"**](http://20.70.244.24/aboutus) page (Figure 20). The [**"About Us"**](http://20.70.244.24/aboutus) page shows the core value of individual team members and their effort to deliver the end product.
+Lastly, we have created an **"About Us"** page (Figure 20). The **"About Us"** page shows the core value of individual team members and their effort to deliver the end product.
 
 ![About Us page](./readme_images/20.png)
 
@@ -302,7 +302,7 @@ Most of the attention is paid to optimising the model to achieve higher accuracy
 
 The raw weights are converted into **Open Neural Network Exchange (ONNX)**. The key benefits of ONNX are its interoperability and hardware access. Once the model is converted into ONNX format, it can be quickly loaded into any hardware that supports ONNX and helps to minimise the inference time. **Also, the model weight is [reduced by 36% when converted into the ONNX format.](https://www.kaggle.com/tirth27/melanoma-classification-kerasonnx-model-weight)**
 
-The optimised ONNX model is then [deployed onto our CAD system](http://20.70.244.24/test), which can better support dermatologists' clinical work. The CAD system takes skin lesion and patient demographic as input and outputs the probability among the nine classes (Table 2).  
+The optimised ONNX model is then deployed onto our CAD system, which can better support dermatologists' clinical work. The CAD system takes skin lesion and patient demographic as input and outputs the probability among the nine classes (Table 2).  
 
 ### Trained Weights
 
