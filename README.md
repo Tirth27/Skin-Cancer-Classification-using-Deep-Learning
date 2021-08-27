@@ -175,7 +175,7 @@ EfficientNet used compound scaling (Figure 8), which uniformly scales the networ
 
 ####  ***You can view the CNN model visualisation under [Model Visualisation.](./Model%20Visualisation/)***
 
-####  ***To start the training process by run [`./Src/Model%20Training/main_run.py`](./Src/Model%20Training/main_run.py) file. Also, to create a Compute Instance on Azure refer to [`./Src/README.md`](https://github.com/Tirth27/Skin-Cancer-Classification-using-Deep-Learning/blob/main/Src/README.md)***
+####  ***To start the training process run [`./Src/Model%20Training/main_run.py`](./Src/Model%20Training/main_run.py) file. Also, to create a Compute Instance on Azure refer to [`./Src/README.md`](https://github.com/Tirth27/Skin-Cancer-Classification-using-Deep-Learning/blob/main/Src/README.md)***
 
 ## GUI Design]
 To tackle the challenge of identifying skin cancer from skin lesions, we have to build a predictive model for **Computer-Aided Diagnosis (CAD)**. Taking the skin lesions image and patient demographic information as input, we have developed a prototype web application that can help dermatologists interpret skin lesion images.
