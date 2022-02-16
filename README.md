@@ -177,7 +177,7 @@ EfficientNet used compound scaling (Figure 8), which uniformly scales the networ
 
 ####  ***To start the training process run [`./Src/Model%20Training/main_run.py`](./Src/Model%20Training/main_run.py) file. Also, to create a Compute Instance on Azure refer to [`./Src/README.md`](https://github.com/Tirth27/Skin-Cancer-Classification-using-Deep-Learning/blob/main/Src/README.md)***
 
-## GUI Design]
+## GUI Design
 To tackle the challenge of identifying skin cancer from skin lesions, we have to build a predictive model for **Computer-Aided Diagnosis (CAD)**. Taking the skin lesions image and patient demographic information as input, we have developed a prototype web application that can help dermatologists interpret skin lesion images.
 
 The web GUI consists of five main pages, of which four of them are used to explain the benefit of using the tool and way to reduce the death caused by skin cancer. The inference page named **"Our Solution"** is where the inference is performed using ensemble methodology.
